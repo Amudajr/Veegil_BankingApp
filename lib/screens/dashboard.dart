@@ -3,8 +3,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:veegil_media/components/custom_button.dart';
+import 'package:veegil_media/screens/login.dart';
 import 'package:veegil_media/screens/send_money.dart';
 import 'package:veegil_media/screens/deposit.dart';
+import 'package:veegil_media/screens/transaction.dart';
 import 'package:http/http.dart' as http;
 
 class Profile {
@@ -139,8 +141,31 @@ class _DashboardPageState extends State<DashboardPage> {
                 CustomButton(
                     title: "Transaction Details",
                     icon: Icons.done_all,
-                    onPressed: () {}),
-              ])
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TransactionPage()),
+                      );
+                    }),
+              ]),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  CustomButton(
+                    title: "Logout", 
+                    icon: Icons.logout, 
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginPage()),
+                      );
+                  })
+                ],
+              ),
         ]),
       ),
     );
