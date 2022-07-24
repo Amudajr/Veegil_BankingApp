@@ -8,6 +8,11 @@ import 'package:veegil_media/utils/utils.dart';
 extension MainX on BuildContext {
   void back() => Navigator.of(this).pop();
 
+  void replace(String pageName) =>
+      Navigator.of(this).pushReplacementNamed(pageName);
+
+  void push(String pageName) => Navigator.of(this).pushNamed(pageName);
+
   void showErrorMessage(String error) {
     ScaffoldMessenger.of(this)
       ..hideCurrentSnackBar()

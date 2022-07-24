@@ -20,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthProvider>();
+    // final authProvider = context.watch<AuthProvider>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -34,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 //   'images/signup.jpg',
                 // ),
                 InkResponse(
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () => context.back(),
                   child: Icon(
                     Icons.arrow_back,
                     size: 25,
@@ -123,6 +123,17 @@ class _RegisterPageState extends State<RegisterPage> {
                           )
                           .then((value) {
                         context.back();
+                        if (value.status == 'error') {
+                          context.showErrorMessage(value.message ?? '');
+                        } else {
+                          context.showSuccessMessage(value.message ?? '');
+                          Future.delayed(
+                            Duration(
+                              milliseconds: 1550,
+                            ),
+                            () => context.push(VeegilBankPage.home),
+                          );
+                        }
                       });
                     }
                   },
@@ -151,8 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       foregroundColor: MaterialStateProperty.all<Color>(
                           Constants.primaryColor),
                     ),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(VeegilBankPage.login),
+                    onPressed: () => context.push(VeegilBankPage.login),
                     child: Text('Login.'),
                   ),
                 ]),

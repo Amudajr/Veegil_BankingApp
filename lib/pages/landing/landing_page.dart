@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:veegil_media/app/app_routes.dart';
+import 'package:veegil_media/utils/utils.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _LandingPageState extends State<LandingPage> {
       Future.delayed(
         const Duration(milliseconds: 1000),
         (() {
-          Navigator.of(context).pushNamed(VeegilBankPage.login);
+          context.push(VeegilBankPage.splash);
         }),
       );
     });

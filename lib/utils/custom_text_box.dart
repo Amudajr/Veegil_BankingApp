@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:veegil_media/utils/utils.dart';
 
 class CustomTextBox extends StatelessWidget {
@@ -9,6 +10,7 @@ class CustomTextBox extends StatelessWidget {
     this.icon,
     this.validator,
     this.isPassword = false,
+    this.inputFormatters,
   });
 
   final TextEditingController? controller;
@@ -16,6 +18,7 @@ class CustomTextBox extends StatelessWidget {
   final IconData? icon;
   final FormFieldValidator? validator;
   final bool isPassword;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class CustomTextBox extends StatelessWidget {
       controller: controller,
       validator: validator,
       obscureText: isPassword,
+      inputFormatters: inputFormatters,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         focusedBorder: const OutlineInputBorder(
@@ -38,10 +42,12 @@ class CustomTextBox extends StatelessWidget {
         border: const OutlineInputBorder(),
         labelText: labelText,
         labelStyle: const TextStyle(color: Constants.primaryColor),
-        prefixIcon: Icon(
-          icon,
-          color: Constants.primaryColor,
-        ),
+        prefixIcon: icon != null
+            ? Icon(
+                icon,
+                color: Constants.primaryColor,
+              )
+            : null,
       ),
     );
   }
