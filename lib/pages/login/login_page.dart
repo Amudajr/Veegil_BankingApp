@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:veegil_media/screens/signup.dart';
+import 'package:veegil_media/app/app_routes.dart';
 import 'package:veegil_media/utils/utils.dart';
 
 class LoginPage extends StatefulWidget {
@@ -92,12 +92,8 @@ class _LoginPageState extends State<LoginPage> {
                     foregroundColor: MaterialStateProperty.all<Color>(
                         Constants.primaryColor),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
-                    );
-                  },
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(VeegilBankPage.register),
                   child: Text('Sign Up'),
                 ),
               ]),

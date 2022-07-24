@@ -7,16 +7,22 @@ class CustomTextBox extends StatelessWidget {
     this.controller,
     this.labelText,
     this.icon,
+    this.validator,
+    this.isPassword = false,
   });
 
   final TextEditingController? controller;
   final String? labelText;
   final IconData? icon;
+  final FormFieldValidator? validator;
+  final bool isPassword;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      validator: validator,
+      obscureText: isPassword,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         focusedBorder: const OutlineInputBorder(

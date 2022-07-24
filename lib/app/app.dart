@@ -7,7 +7,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData().copyWith(
         primaryColor: const Color(0xFF0175C2),
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),

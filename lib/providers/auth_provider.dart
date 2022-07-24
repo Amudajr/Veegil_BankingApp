@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'package:veegil_media/utils/utils.dart';
 
 class AuthProvider extends ChangeNotifier {
+  bool _loading = true;
+  bool get loading => _loading;
+
   void login(String phoneno, password) async {
     try {
-      Response response = await post(
+      final response = await http.post(
           Uri.parse('https://bank.veegil.com/auth/login'),
           body: {'phoneNumber': phoneno, 'password': password});
       if (response.statusCode == 200) {
@@ -24,17 +28,24 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  void signup(String phoneno, password) async {
+  Future<void> register({
+    required String phoneNumber,
+    required String password,
+  }) async {
     try {
-      Response response = await post(
-          Uri.parse('https://bank.veegil.com/auth/signup'),
-          body: {'phoneNumber': phoneno, 'password': password});
+      _loading = true;
+      final response = await http.post(
+          Uri.parse('${Constants.baseUrl}/auth/signup'),
+          body: {'phoneNumber': phoneNumber, 'password': password});
+      print(response.body);
+      _loading = false;
       if (response.statusCode == 200) {
         print('Account Created Successfully');
       } else {
         print('failed');
       }
     } catch (e) {
+      _loading = false;
       print(e.toString());
     }
   }
