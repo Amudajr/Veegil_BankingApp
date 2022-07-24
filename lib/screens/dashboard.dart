@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:veegil_media/components/custom_button.dart';
+import 'package:veegil_media/utils/custom_button.dart';
 import 'package:veegil_media/screens/login.dart';
 import 'package:veegil_media/screens/send_money.dart';
 import 'package:veegil_media/screens/deposit.dart';
 import 'package:veegil_media/screens/transaction.dart';
 import 'package:http/http.dart' as http;
+import 'package:veegil_media/utils/custom_button.dart';
 
 class Profile {
   final String phone;
@@ -26,7 +27,7 @@ class Profile {
 class DashboardPage extends StatefulWidget {
   final String phone;
 
-  DashboardPage({required this.phone});
+  const DashboardPage({required this.phone});
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -54,6 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
       print(err);
       return null;
     }
+    return null;
   }
 
   @override
@@ -68,15 +70,15 @@ class _DashboardPageState extends State<DashboardPage> {
       body: SafeArea(
         child: Column(children: <Widget>[
           Container(
-            padding: EdgeInsets.all(30),
-            margin: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(30),
+            margin: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black, width: 4),
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
-                new BoxShadow(
-                  color: Color(0xFF979EF2),
-                  offset: new Offset(6.0, 6.0),
+                BoxShadow(
+                  color: const Color(0xFF979EF2),
+                  offset: const Offset(6.0, 6.0),
                 ),
               ],
             ),
@@ -96,76 +98,72 @@ class _DashboardPageState extends State<DashboardPage> {
                   subtitle: Text('The bank you can trust',
                       style: TextStyle(fontSize: 18.0)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
-                Text('${widget.phone}', style: TextStyle(fontSize: 18.0)),
-                SizedBox(
+                Text(widget.phone, style: const TextStyle(fontSize: 18.0)),
+                const SizedBox(
                   height: 2,
                 ),
-                Text('futureprof.toString()'),
+                const Text('futureprof.toString()'),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <
+              Widget>[
+            CustomButton(
+                title: "Send Money",
+                icon: Icons.send,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SendMoneyPage()),
+                  );
+                }),
+            const SizedBox(
+              width: 5,
+            ),
+            CustomButton(
+                title: "Deposit",
+                icon: Icons.money,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DepositPage()),
+                  );
+                }),
+            const SizedBox(
+              width: 5,
+            ),
+            CustomButton(
+                title: "Transaction Details",
+                icon: Icons.done_all,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TransactionPage()),
+                  );
+                }),
+          ]),
+          const SizedBox(
+            height: 20,
+          ),
           Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                CustomButton(
-                    title: "Send Money",
-                    icon: Icons.send,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SendMoneyPage()),
-                      );
-                    }),
-                SizedBox(
-                  width: 5,
-                ),
-                CustomButton(
-                    title: "Deposit",
-                    icon: Icons.money,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => DepositPage()),
-                      );
-                    }),
-                SizedBox(
-                  width: 5,
-                ),
-                CustomButton(
-                    title: "Transaction Details",
-                    icon: Icons.done_all,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TransactionPage()),
-                      );
-                    }),
-              ]),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  CustomButton(
-                    title: "Logout", 
-                    icon: Icons.logout, 
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoginPage()),
-                      );
+            children: [
+              CustomButton(
+                  title: "Logout",
+                  icon: Icons.logout,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
                   })
-                ],
-              ),
+            ],
+          ),
         ]),
       ),
     );
