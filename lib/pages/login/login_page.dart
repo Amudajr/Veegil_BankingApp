@@ -23,114 +23,119 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset('images/login1.jpg'),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Log In',
-                  style: GoogleFonts.ubuntu(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Constants.primaryColor,
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('images/signup.jpg',
                   ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  'Hey there, login into your account',
-                  style: GoogleFonts.ubuntu(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                CustomTextBox(
-                  controller: phonenoController,
-                  labelText: 'Phone Number',
-                  icon: Icons.phone_android_rounded,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Phone Number is required';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                CustomTextBox(
-                  controller: passwordController,
-                  labelText: 'Password',
-                  icon: Icons.lock,
-                  isPassword: true,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Password is required';
-                    }
-                    return null;
-                  },
-                ),
-                Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.showLoadingDialog();
-                      context
-                          .read<AuthProvider>()
-                          .login(
-                            phoneNumber: phonenoController.text,
-                            password: passwordController.text,
-                          )
-                          .then((value) {
-                        context.back();
-                        if (value.status == 'error') {
-                          context.showErrorMessage(value.message ?? '');
-                        } else {
-                          context.showSuccessMessage(value.message ?? '');
-                        }
-                      });
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Constants.primaryColor,
-                    fixedSize: const Size(
-                      350,
-                      50,
-                    ),
-                  ),
-                  child: Text(
-                    "LOG IN",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
-                    "Don't have an account?",
-                    style: const TextStyle(color: Colors.black),
-                  ),
-                  TextButton(
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(
-                          Constants.primaryColor),
+                    'Log In',
+                    style: GoogleFonts.ubuntu(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Constants.primaryColor,
                     ),
-                    onPressed: () => context.push(VeegilBankPage.register),
-                    child: Text('Sign Up'),
                   ),
-                ]),
-              ],
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Hey there, login into your account',
+                    style: GoogleFonts.ubuntu(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CustomTextBox(
+                    controller: phonenoController,
+                    labelText: 'Phone Number',
+                    icon: Icons.phone_android_rounded,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Phone Number is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CustomTextBox(
+                    controller: passwordController,
+                    labelText: 'Password',
+                    icon: Icons.lock,
+                    isPassword: true,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Password is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.showLoadingDialog();
+                        context
+                            .read<AuthProvider>()
+                            .login(
+                              phoneNumber: phonenoController.text,
+                              password: passwordController.text,
+                            )
+                            .then((value) {
+                          context.back();
+                          if (value.status == 'error') {
+                            context.showErrorMessage(value.message ?? '');
+                          } else {
+                            context.showSuccessMessage(value.message ?? '');
+                          }
+                        });
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Constants.primaryColor,
+                      fixedSize: const Size(
+                        350,
+                        50,
+                      ),
+                    ),
+                    child: Text(
+                      "LOG IN",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text(
+                      "Don't have an account?",
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            Constants.primaryColor),
+                      ),
+                      onPressed: () => context.push(VeegilBankPage.register),
+                      child: Text('Sign Up'),
+                    ),
+                  ]),
+                ],
+              ),
             ),
           ),
         ),
